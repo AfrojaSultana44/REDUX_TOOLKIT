@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from "./store/reducers/countReducer";
+
 
 function App() {
+  const count = useSelector((state) => state.count);
+  const dispatch = useDispatch();
+
+  const incrementHandler = () => {
+    const payload = {value: 1};
+    dispatch(increment(payload))
+
+  };
+
+  const decrementHandler = () => {
+    const payload = {value: 1};
+    dispatch(decrement(payload))
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <h2 style={{textAlign: "center"}}>React Redux {count.value}</h2>
+      <div style={{textAlign: "center", marginTop: "20px"}}>
+        <button
+          onClick={incrementHandler}
+          style={{
+            padding: "10px 20px",
+            borderRadius: "8px",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Increment
+        </button>
+      </div>
+      <div style={{textAlign: "center", marginTop:"20px"}}>
+        <button
+          onClick={decrementHandler}
+          style={{
+            padding: "10px 20px",
+            borderRadius: "8px",
+          }}
+        >
+          Decrement
+        </button>
+      </div>
     </div>
   );
 }
